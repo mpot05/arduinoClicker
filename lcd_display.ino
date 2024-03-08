@@ -4,6 +4,7 @@
 
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
+const int buzzerpin = 9;
 unsigned long int cookies = 0;
 int buttonPin = 6;
 int buttonState = 0;        // current state of the button
@@ -12,6 +13,7 @@ int lastButtonState = 0;    // previous state of the button
 void setup() {
   // put your setup code here, to run once:
   pinMode(buttonPin, INPUT);
+  pinMode(buzzerpin, OUTPUT);
   lcd.begin(16, 2);
   lcd.setBacklight(1);
   delay(1000);
@@ -26,6 +28,7 @@ void loop() {
     // if the state has changed, increment the counter
     if (buttonState == HIGH) {
       // if the current state is HIGH then the button went from off to on:
+      tone(buzzerpin,1000,100);
       cookies++;
     } else {
       // if the current state is LOW then the button went from on to off:
